@@ -5,51 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cook Book</title>
-    <!--Bootsrap-->
+    <!--bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!--bootstrap for icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class = "mb-3"> Your Personal Cook Book</h1>
-
-
-
-    <form action ="/add-recipes" method = "post">
-        <div class = "mb-3">
-            <label for ="meal_name" class ="form-label">Recipes name:</label>
-            <input type = "text" required class = "form-control" name = "recipesName" id = "recipedName">
+    <div class="container mt-5">
+        <h1 class = "mb-3"> Your Personal Cook Book</h1>
+        <div class="container">
+            <h2>Do you want to:</h2>
+            <div class="container">
+              <div class="text-center">
+                <a class="btn btn-primary" href = "/searchMeal" role="button">Search Recipes</a> 
+                <a class="btn btn-primary" href = "/addMeal" role="button">Add meal</a>
             
-        </div>
+              </div>
+            </div>
+         <hr>
+         <h2 class = "mb-3"> Your Recipes:</h2>
+         {% for x in meal %}
+            <div class=" card mb-3">
+                <div class ="card-body">
+                    <h5 class = "card-title">{{x.name}}</h5>
+                    <p>
+                        <b>Time:</b> {{x.time}}
+                        <br> <b>Ingredients: </b>
+                        <br> {{x.ingredients}}
+                        <br><b>Description:</b> 
+                        <br>{{x.description}}
+                    </p>
+                </div>
+                <div class = "card-footer">
+                    <a href="/delete/{{x.id}}" class = "text-muted text-decoratione-none">
+                        <i class = "bi bi-trash"></i> Delete
+                    </a>
 
-        <div class = "mb-3">
-            <label for ="meal_time" class ="form-label">Cooking time:</label>
-            <input type = "text" required class = "form-control" name = "timerequired" id = "recipesTime">
-            
-        </div>
+                </div>
 
-        <div class = "mb-3">
-            <label for ="meal_ingredients" class ="form-label">Ingredients:</label>
-            <input type = "text" required class = "form-control" name = "ingredients" id = "recipesIng">
-            
-        </div>
-        <div class = "mb-3">
-            <label for ="meal_description" class ="form-label">Instructions:</label>
-            <textarea  required class = "form-control" name = "instructions" id = "recipesinstruction" rows=""3"></textarea>
-            
-        </div>
+            </div>
 
-        <div>
-            <button type = "submit" class = "btn btn-primary"> Save </button>
-            <button type = "submit" class = "btn btn-outline-secondary"> Cancle </button>
-        </div>
 
-    </form>
+         {%endfor %}
 
-</div>
+
     
+    </div>
     
 
+
+    
 <!--Bootstrap js-->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>        
 </body>
 </html>

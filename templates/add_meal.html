@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cook Book</title>
+    <!--Bootsrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+<div>
+    <a class="btn btn-outline-secondary" href = "/" role="button">Go Back</a>
+
+</div>
+<div class="container mt-5">
+    <h1 class = "mb-3"> Your Personal Cook Book</h1>
+
+
+
+    <form action ="/add-recipes" method = "post">
+        <div class = "mb-3">
+            <label for ="meal_name" class ="form-label">Recipes name:</label>
+            <input type = "text" required class = "form-control" name = "recipesName" id = "recipedName">
+            
+        </div>
+
+        <div class = "mb-3">
+            <label for ="meal_time" class ="form-label">Cooking time:</label>
+            <input type = "text" required class = "form-control" name = "timerequired" id = "recipesTime">
+            
+        </div>
+
+        <div class = "mb-3">
+            <label for ="meal_ingredients" class ="form-label">Ingredients:</label>
+            <input type = "text" required class = "form-control" name = "ingredients" id = "recipesIng">
+            
+        </div>
+        <div class = "mb-3">
+            <label for ="meal_description" class ="form-label">Instructions:</label>
+            <textarea  required class = "form-control" name = "instructions" id = "recipesinstruction" rows=""3"></textarea>
+            
+        </div>
+
+        <div>
+            <button type = "submit" class = "btn btn-primary"> Save </button>
+            <a class="btn btn-outline-secondary" href = "addMeal" role="button">Cancle</a>
+            
+        </div>
+
+    </form>
+
+
+</div>
+    
+    
+
+<!--Bootstrap js-->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>    
+</body>
+</html>

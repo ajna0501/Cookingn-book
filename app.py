@@ -22,9 +22,22 @@ db.create_all()
 
 
 #langing page
-@app.route("/")
+@app.route("/", methods = ["GET"])
 def index_page():
-    return render_template("index.html")
+
+    meal = Meal.query.all()
+
+    return render_template("index.html", meal = meal)
+
+@app.route("/addMeal")
+def add_recipes():
+    return render_template("add_meal.html")
+
+@app.route("/searchMeal")
+def search_Meal():
+    return render_template("search_meal.html")
+
+
 
 #adding recipes
 @app.route("/add-recipes", methods = ["POST"])
@@ -35,15 +48,36 @@ def add_meal():
     ingredients = request.form.get("ingredients")
     description = request.form.get("instructions")
 
-    meal = Meal(name = name, time = time, ingredients=ingredients,description= description)
+    meal = Meal(name = name, time = time, ingredients=ingredients,description= description) # meal object
     db.session.add(meal)
-    db.session.commit()
-
-
+    db.session.commit() # save to database
 
 
     #if error occurs return to the main page
     return redirect("/")
+
+@app.route("/search-recipes",methods = ["POST"])
+def searchMeal():
+
+    search= request.form.get("searchitem")
+    print(search)
+
+    return redirec("/")
+
+
+
+@app.route("/delete/<meal_id>",methods = ["GET"])
+def delete_meal(meal_id):
+
+    meal = Meal.query.get(int(meal_id))
+
+    db.session.delete(meal)
+    db.session.commit()
+
+
+
+    return redirect("/")
+
 
 
 
