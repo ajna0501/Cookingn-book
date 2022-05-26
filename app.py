@@ -29,10 +29,11 @@ def index_page():
 
     return render_template("index.html", meal = meal)
 
+#for adding meal page
 @app.route("/addMeal")
 def add_recipes():
     return render_template("add_meal.html")
-
+#for searching meals page
 @app.route("/searchMeal")
 def search_Meal():
     return render_template("search_meal.html")
@@ -56,30 +57,31 @@ def add_meal():
     #if error occurs return to the main page
     return redirect("/")
 
+#searching meth
 @app.route("/search-recipes",methods = ["POST"])
 def searchMeal():
 
     search= request.form.get("searchitem")
-    print(search)
-
-    return redirec("/")
-
-
-
-@app.route("/delete/<meal_id>",methods = ["GET"])
-def delete_meal(meal_id):
-
-    meal = Meal.query.get(int(meal_id))
-
-    db.session.delete(meal)
-    db.session.commit()
-
-
+    
+  
 
     return redirect("/")
 
 
 
+#deleteing meals
+@app.route("/delete/<meal_id>",methods = ["GET"])
+def delete_meal(meal_id):
+
+    #get the meal
+    meal = Meal.query.get(int(meal_id))
+
+    db.session.delete(meal) #delete the meal
+    db.session.commit()
+
+
+
+    return redirect("/")
 
 
 
