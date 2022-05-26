@@ -1,5 +1,5 @@
 
-from flask import Flask,render_template,request, redirect#
+from flask import Flask,render_template,request, redirect, flash#
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -52,17 +52,34 @@ def add_meal():
     meal = Meal(name = name, time = time, ingredients=ingredients,description= description) # meal object
     db.session.add(meal)
     db.session.commit() # save to database
+    
 
 
     #if error occurs return to the main page
     return redirect("/")
 
 #searching meth
-@app.route("/search-recipes",methods = ["POST"])
+@app.route("/search-recipes",methods = ["POST","GET"])
 def searchMeal():
 
     search= request.form.get("searchitem")
+    serachOption=request.form.get("searchoption")
+
+    print(search)
+    print(serachOption)
     
+    if serachOption == "name":
+        n=Meal.query.filter(Meal.name ==search).all()
+        print(n)
+    if serachOption == "time":
+        t=Meal.query.filter(Meal.time ==search).all()
+        print(t)
+    if serachOption == "ingredients":
+        i=Meal.query.filter(Meal.ingredients ==search).all()
+        print(i)
+
+
+
   
 
     return redirect("/")

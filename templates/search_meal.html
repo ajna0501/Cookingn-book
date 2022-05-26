@@ -16,8 +16,16 @@
 
     <form action ="/search-recipes" method = "post">
         <div class = "mb-3">
-            <label for ="meal_name" class ="form-label">Search:</label>
-            <input type = "text" required class = "form-control" name = "searchitem" id = "searchitem">
+            <label for ="meal_name" class ="form-label">Search by:</label>
+            <br>
+            <select class="form-select" aria-label="Default select example" name="searchoption">
+                <option selected value="name" >Name</option>
+                <option value="time" >Cooking Time</option>
+                <option value="ingredients" >Ingredients</option>
+        
+              </select>
+              <br>
+            <input type = "text" required class = "form-control" placeholder="Search" aria-label="Search" name = "searchitem" id = "searchitem">
         </div>
             
         <div>
