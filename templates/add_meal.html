@@ -9,12 +9,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!--bootstrap for icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <style>
+          .bi.bi-arrow-left {
+            width: 80px;
+            height: 80px;
+           
+        } 
+        .bi.bi-arrow-left::before {
+            transform: scale(2); 
+            color: black;
+            padding-left: 42px;
+            margin-top: 12px;
+        } 
+    
+    </style>
 </head>
+
+
 <body>
 
-
-
-<div class="container mt-5">
+    <a class="bi bi-arrow-left" href = "/" role="button"></a>
+    
+    <div class="container mt-5">
+    
     <h2 class = "mb-3"> Add your recipe</h2>
     <hr>
     <form action ="/add-recipes" method = "post">
@@ -48,6 +65,13 @@
         </div>
 
     </form>
+
+    {%for x in meal %}
+    <div>
+        <p>Meal</p>{{x.name}}<p> has been succesfully added to the collection!</p>
+    </div>
+    {%endfor%}
+   
 
 
 </div>

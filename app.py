@@ -1,6 +1,7 @@
 
 from flask import Flask,render_template,request, redirect, flash#
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import null
 
 app = Flask(__name__)
 
@@ -33,9 +34,11 @@ def index_page():
 @app.route("/addMeal")
 def add_recipes():
     return render_template("add_meal.html")
+
 #for searching meals page
 @app.route("/searchMeal")
 def search_Meal():
+
     return render_template("search_meal.html")
 
 
@@ -52,14 +55,16 @@ def add_meal():
     meal = Meal(name = name, time = time, ingredients=ingredients,description= description) # meal object
     db.session.add(meal)
     db.session.commit() # save to database
+
+    meal=Meal.query.filter(Meal.name ==name).all()
     
 
 
     #if error occurs return to the main page
-    return redirect("/")
+    return render_template("add_meal.html", meal=meal)
 
 #searching meth
-@app.route("/search-recipes",methods = ["POST","GET"])
+@app.route("/search-recipes",methods = ["POST"])
 def searchMeal():
 
     search= request.form.get("searchitem")
@@ -67,23 +72,29 @@ def searchMeal():
 
     print(search)
     print(serachOption)
+
+    meal1 = None
     
     if serachOption == "name":
-        n=Meal.query.filter(Meal.name ==search).all()
-        print(n)
+        a=Meal.query.filter(Meal.name.ilike(search)).all()
+        meal1 = a
+       # print(a)
     if serachOption == "time":
-        t=Meal.query.filter(Meal.time ==search).all()
-        print(t)
+        a=Meal.query.filter(Meal.time <=int(search)).all()
+        meal1= a
+       # print(a)
+
     if serachOption == "ingredients":
-        i=Meal.query.filter(Meal.ingredients ==search).all()
-        print(i)
+        a=Meal.query.filter(Meal.ingredients.contains(search)).all()
+        meal1=a
+        #print(a)
 
+    print(meal1)
 
+    
 
-  
-
-    return redirect("/")
-
+    return render_template("search_meal.html", meal1 = meal1)
+   
 
 
 #deleteing meals

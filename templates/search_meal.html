@@ -7,8 +7,26 @@
     <title>Cook Book</title>
     <!--Bootsrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!--bootstrap for icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <style>
+        .bi.bi-arrow-left {
+            width: 80px;
+            height: 80px;
+           
+        } 
+        .bi.bi-arrow-left::before {
+            transform: scale(2); 
+            color: black;
+            padding-left: 42px;
+            margin-top: 12px;
+        } 
+    </style>
 </head>
 <body>
+
+<a class="bi bi-arrow-left" href = "/" role="button"></a>
+
 <div class="container mt-5">
     <h1 class = "mb-3"> Your Personal Cook Book</h1>
 
@@ -27,14 +45,40 @@
               <br>
             <input type = "text" required class = "form-control" placeholder="Search" aria-label="Search" name = "searchitem" id = "searchitem">
         </div>
+        
             
         <div>
-            <button type = "submit" class = "btn btn-primary"> Search</button>
-            <a class="btn btn-outline-secondary" href = "/" role="button">Cancle</a>
+            <button type = "submit" class = "btn btn-primary" > Search</button>
+            <a class="btn btn-outline-secondary" href = "/searchMeal" role="button">Cancle</a>
             
         </div>
 
-    </form>
+        </form>
+        <br>
+
+
+        <h2 class = "mb-3"> Results:</h2>
+        {%if meal1==[]%}
+        <p> No such recipe founded</p>
+        {%else%}
+            
+            {% for x in meal1 %}
+            <div class=" card mb-3">
+                <div class ="card-body">
+                    <h5 class = "card-title">{{x.name}}</h5>
+                    <hr>
+                    <p>
+                        <b>Time:</b> {{x.time}}
+                        <br> <b>Ingredients: </b>
+                        <br> {{x.ingredients}}
+                        <br><b>Description:</b> 
+                        <br>{{x.description}}
+                    </p>
+                </div>
+            </div>
+                {%endfor %}
+            {%endif%}
+                
 
 </div>
     
