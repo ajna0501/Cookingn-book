@@ -13,7 +13,7 @@ class Meal(db.Model):
     #table
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
-    time = db.Column(db.String)
+    time = db.Column(db.Integer)
     ingredients = db.Column(db.String)
     description = db.Column(db.String)
 
@@ -26,7 +26,7 @@ db.create_all()
 @app.route("/", methods = ["GET"])
 def index_page():
 
-    meal = Meal.query.all()
+    meal = Meal.query.all() #get all from dataabase
 
     return render_template("index.html", meal = meal)
 
@@ -42,11 +42,11 @@ def search_Meal():
     return render_template("search_meal.html")
 
 
-
 #adding recipes
 @app.route("/add-recipes", methods = ["POST"])
 def add_meal():
 
+    #get the unput of a user
     name = request.form.get("recipesName")
     time = request.form.get("timerequired")
     ingredients = request.form.get("ingredients")
@@ -54,37 +54,44 @@ def add_meal():
 
     meal = Meal(name = name, time = time, ingredients=ingredients,description= description) # meal object
     db.session.add(meal)
-    db.session.commit() # save to database
+    db.session.commit() #save to database
 
-    meal=Meal.query.filter(Meal.name ==name).all()
+    meal=Meal.query.filter(Meal.name ==name).all() #take the meal to get the name
     
 
 
-    #if error occurs return to the main page
+    #when iuts added
+    # again stay on this page
     return render_template("add_meal.html", meal=meal)
 
 #searching meth
 @app.route("/search-recipes",methods = ["POST"])
 def searchMeal():
 
-    search= request.form.get("searchitem")
-    serachOption=request.form.get("searchoption")
+    #input pof the user
+    search= request.form.get("searchitem") 
 
-    print(search)
-    print(serachOption)
+    #option to chose name,time and ingredients
+    serachOption=request.form.get("searchoption") 
 
+    #print(search)
+    #print(serachOption)
+
+    
     meal1 = None
     
     if serachOption == "name":
         a=Meal.query.filter(Meal.name.ilike(search)).all()
         meal1 = a
-       # print(a)
-    if serachOption == "time":
-        a=Meal.query.filter(Meal.time <=int(search)).all()
-        meal1= a
-       # print(a)
+        #print(a)
 
-    if serachOption == "ingredients":
+    elif serachOption == "time":
+    #need to fix when user inpus string instead of numbers
+        a=Meal.query.filter(Meal.time <= int(search)).all()
+        meal1= a
+        #print(a)
+
+    elif serachOption == "ingredients":
         a=Meal.query.filter(Meal.ingredients.contains(search)).all()
         meal1=a
         #print(a)
@@ -101,10 +108,11 @@ def searchMeal():
 @app.route("/delete/<meal_id>",methods = ["GET"])
 def delete_meal(meal_id):
 
-    #get the meal
+    #get the meal id
     meal = Meal.query.get(int(meal_id))
 
-    db.session.delete(meal) #delete the meal
+    #delete meal
+    db.session.delete(meal)
     db.session.commit()
 
 

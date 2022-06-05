@@ -21,6 +21,12 @@
             padding-left: 42px;
             margin-top: 12px;
         } 
+
+        .mb-6{
+           
+            padding :10px 5px 15px;
+            text-align: center;
+        }
     
     </style>
 </head>
@@ -37,19 +43,19 @@
     <form action ="/add-recipes" method = "post">
         <div class = "mb-3">
             <label for ="meal_name" class ="form-label">Recipes name:</label>
-            <input type = "text" required class = "form-control" name = "recipesName" id = "recipedName">
+            <input type = "text" required class = "form-control" placeholder = "Name" name = "recipesName" id = "recipedName">
             
         </div>
 
         <div class = "mb-3">
             <label for ="meal_time" class ="form-label">Cooking time:</label>
-            <input type = "text" required class = "form-control" name = "timerequired" id = "recipesTime">
+            <input type = "number" required class = "form-control" placeholder = "In minutes" name = "timerequired" id = "recipesTime">
             
         </div>
 
         <div class = "mb-3">
             <label for ="meal_ingredients" class ="form-label">Ingredients:</label>
-            <input type = "text" required class = "form-control" name = "ingredients" id = "recipesIng">
+            <input type = "text" required class = "form-control" placeholder = "E.g eggs, milk..." name = "ingredients" id = "recipesIng">
             
         </div>
         <div class = "mb-3">
@@ -65,10 +71,14 @@
         </div>
 
     </form>
+    <br>
+
 
     {%for x in meal %}
-    <div>
-        <p>Meal</p>{{x.name}}<p> has been succesfully added to the collection!</p>
+    <div class="mb-6">
+        <div>
+            <h3> Meal <b> {{x.name}} </b> has been succesfully added to the collection!</h3>
+        </div>
     </div>
     {%endfor%}
    
